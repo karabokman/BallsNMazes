@@ -145,6 +145,8 @@ class Player extends BodyComponent with ContactCallbacks, TapCallbacks {
         // Get componets of player's parents
         ancestors().forEach((component) {
           if (component is MazeGame) {
+            // Reset joystick
+            component.joystick.onDragStop();
             // Get current level's number
             int levelNumber = int.parse(component.levelNumber);
             // Stop the stopwatch
@@ -184,6 +186,8 @@ class Player extends BodyComponent with ContactCallbacks, TapCallbacks {
               _playerData.markLevelCompleted(levelNumber, timeTaken);
             }
             _playerData.save();
+
+            component.showInterstitialAd();
           }
         });
         reachedCheckpoint = true;

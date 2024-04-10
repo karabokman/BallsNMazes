@@ -1,3 +1,4 @@
+import 'package:balls_n_mazes/widgets/banner_ad.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:balls_n_mazes/components/game.dart';
@@ -20,34 +21,36 @@ class GamePlayScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final playerData = Provider.of<PlayerData>(context, listen: false);
     return Scaffold(
-        body: PopScope(
-            canPop: false,
-            child: GameWidget(
-              game: MazeGame(
-                  levelNumber: levelNum,
-                  ballType: playerData.ballType,
-                  powerUps: playerData.powerUps),
-              initialActiveOverlays: const [
-                DidYouKnowScreen.id,
-              ],
-              overlayBuilderMap: {
-                PauseButton.id: (BuildContext context, MazeGame gameRef) =>
-                    PauseButton(gameRef: gameRef),
-                PauseMenu.id: (BuildContext context, MazeGame gameRef) =>
-                    PauseMenu(gameRef: gameRef),
-                WinMenu.id: (BuildContext context, MazeGame gameRef) =>
-                    WinMenu(gameRef: gameRef),
-                LevelText.id: (BuildContext context, MazeGame gameRef) =>
-                    LevelText(gameRef: gameRef),
-                DidYouKnowScreen.id: (BuildContext context, MazeGame gameRef) =>
-                    DidYouKnowScreen(gameRef: gameRef),
-                StartLevelMenu.id: (BuildContext context, MazeGame gameRef) =>
-                    StartLevelMenu(gameRef: gameRef),
-                PowerUpText.id: (BuildContext context, MazeGame gameRef) =>
-                    PowerUpText(gameRef: gameRef),
-                GameOverMenu.id: (BuildContext context, MazeGame gameRef) =>
-                    GameOverMenu(gameRef: gameRef),
-              },
-            )));
+      body: PopScope(
+          canPop: false,
+          child: GameWidget(
+            game: MazeGame(
+                levelNumber: levelNum,
+                ballType: playerData.ballType,
+                powerUps: playerData.powerUps),
+            initialActiveOverlays: const [
+              DidYouKnowScreen.id,
+            ],
+            overlayBuilderMap: {
+              PauseButton.id: (BuildContext context, MazeGame gameRef) =>
+                  PauseButton(gameRef: gameRef),
+              PauseMenu.id: (BuildContext context, MazeGame gameRef) =>
+                  PauseMenu(gameRef: gameRef),
+              WinMenu.id: (BuildContext context, MazeGame gameRef) =>
+                  WinMenu(gameRef: gameRef),
+              LevelText.id: (BuildContext context, MazeGame gameRef) =>
+                  LevelText(gameRef: gameRef),
+              DidYouKnowScreen.id: (BuildContext context, MazeGame gameRef) =>
+                  DidYouKnowScreen(gameRef: gameRef),
+              StartLevelMenu.id: (BuildContext context, MazeGame gameRef) =>
+                  StartLevelMenu(gameRef: gameRef),
+              PowerUpText.id: (BuildContext context, MazeGame gameRef) =>
+                  PowerUpText(gameRef: gameRef),
+              GameOverMenu.id: (BuildContext context, MazeGame gameRef) =>
+                  GameOverMenu(gameRef: gameRef),
+            },
+          )),
+      bottomNavigationBar: const BannerWidget(),
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:balls_n_mazes/widgets/banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:balls_n_mazes/models/player_data.dart';
@@ -30,39 +31,42 @@ class SelectLevelScreen extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50.0),
-              child: Text('Levels',
-                  style: Theme.of(context).textTheme.headlineLarge),
-            ),
-            SizedBox(
-              width: width * 0.9,
-              height: height * 0.45,
-              child: CarouselSlider.builder(
-                itemCount: levels.length,
-                slideIndicator: CircularSlideIndicator(
-                    padding: const EdgeInsets.only(bottom: 10.0),
-                    currentIndicatorColor: Colors.white),
-                slideBuilder: (index) {
-                  final level = levels[index];
-                  return Center(child: level);
-                },
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
+                child: Text('Levels',
+                    style: Theme.of(context).textTheme.headlineLarge),
               ),
-            ),
-            SizedBox(
-              width: width / 3,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
+              SizedBox(
+                width: width * 0.9,
+                height: height * 0.45,
+                child: CarouselSlider.builder(
+                  itemCount: levels.length,
+                  slideIndicator: CircularSlideIndicator(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      currentIndicatorColor: Colors.white),
+                  slideBuilder: (index) {
+                    final level = levels[index];
+                    return Center(child: level);
                   },
-                  child: const Icon(Icons.arrow_back_ios_new)),
-            ),
-          ],
+                ),
+              ),
+              SizedBox(
+                width: width / 3,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Icon(Icons.arrow_back_ios_new)),
+              ),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: const BannerWidget(),
     );
   }
 

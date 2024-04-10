@@ -42,7 +42,7 @@ class WinMenu extends StatelessWidget {
                     gameRef.getBadge(),
                     style: const TextStyle(fontSize: 18.0),
                   ),
-                  gameRef.isFirstTime
+                  gameRef.newBestTime
                       ? const Text(
                           'New Best Time + 5',
                           style: TextStyle(fontSize: 14.0),

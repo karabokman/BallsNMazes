@@ -1,3 +1,4 @@
+import 'package:balls_n_mazes/widgets/banner_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:balls_n_mazes/screens/settings_screen.dart';
 import 'package:balls_n_mazes/screens/select_ball_screen.dart';
@@ -11,44 +12,49 @@ class MainMenuScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50.0),
-              child: Image.asset('assets/images/Misc/Banner.png',
-                  width: 200, height: 50),
-            ),
-            SizedBox(
-              width: width / 3,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SelectBallScreen()));
-                  },
-                  child: const Text('Play')),
-            ),
-            SizedBox(
-              width: width / 3,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SettingsScreen()));
-                  },
-                  child: const Text('Settings')),
-            ),
-            SizedBox(
-              width: width / 3,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const TutorialScreen()));
-                  },
-                  child: const Text('Help')),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
+                child: Image.asset(
+                  'assets/images/Misc/Banner.png',
+                  width: width * 0.9,
+                ),
+              ),
+              SizedBox(
+                width: width / 3,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SelectBallScreen()));
+                    },
+                    child: const Text('Play')),
+              ),
+              SizedBox(
+                width: width / 3,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const SettingsScreen()));
+                    },
+                    child: const Text('Settings')),
+              ),
+              SizedBox(
+                width: width / 3,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const TutorialScreen()));
+                    },
+                    child: const Text('Help')),
+              ),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: const BannerWidget(),
     );
   }
 }

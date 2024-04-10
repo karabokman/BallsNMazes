@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:balls_n_mazes/services/admob_service.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
@@ -14,6 +15,7 @@ import 'package:balls_n_mazes/widgets/overlays/pause_button.dart';
 import 'package:balls_n_mazes/widgets/overlays/pause_menu.dart';
 import 'package:balls_n_mazes/widgets/overlays/start_level_menu.dart';
 import 'package:balls_n_mazes/models/did_you_know.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class MazeGame extends Forge2DGame with DragCallbacks {
   String levelNumber;
@@ -41,6 +43,8 @@ class MazeGame extends Forge2DGame with DragCallbacks {
   final Stopwatch _stopWatch = Stopwatch();
   // Current did you know fact
   late DidYouKnow currentFact;
+  // Interstitial ad
+  InterstitialAd? _interstitialAd;
   // initialise background colour
   final Color _backgroundColour = Colors.teal;
   //set background colour
@@ -236,6 +240,8 @@ class MazeGame extends Forge2DGame with DragCallbacks {
   }
 
   Future<void> _loadLevel() async {
+    // Initialize ad
+    _createInterstitialAd();
     // Set power is used to false at the beginning of the level
     isPowerUsed = false;
     // Initially set is first time to false
@@ -288,6 +294,32 @@ class MazeGame extends Forge2DGame with DragCallbacks {
   void setCurrentFact() {
     currentFact = DidYouKnow.funFacts
         .elementAt(Random().nextInt(DidYouKnow.funFacts.length));
+  }
+
+  void _createInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdmobService.intertitialAdUnitId!,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+            onAdLoaded: (ad) => _interstitialAd = ad,
+            onAdFailedToLoad: ((error) => _interstitialAd = null)));
+  }
+
+  void showInterstitialAd() {
+    if (_interstitialAd != null) {
+      _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (ad) {
+          ad.dispose();
+          _createInterstitialAd();
+        },
+        onAdFailedToShowFullScreenContent: (ad, error) {
+          ad.dispose();
+          _createInterstitialAd();
+        },
+      );
+      _interstitialAd!.show();
+      _interstitialAd = null;
+    }
   }
 
   @override

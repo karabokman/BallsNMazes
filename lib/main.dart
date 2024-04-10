@@ -7,9 +7,12 @@ import 'package:balls_n_mazes/models/settings.dart';
 import 'package:balls_n_mazes/screens/main_menu_screen.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+
   await Flame.device.fullScreen();
   await Flame.device.setPortrait();
 

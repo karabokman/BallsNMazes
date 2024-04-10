@@ -12,7 +12,7 @@ class Tutorial {
     Tutorial(
         assetPath: 'assets/images/Misc/Movement.png',
         description:
-            'Use the joystick to move the ball to your desired direction.',
+            'Drag on the screen and a joystick will appear which you can use to move the ball to your desired direction.',
         title: 'Movement'),
     Tutorial(
         assetPath: 'assets/images/Misc/Painters.png',
